@@ -29,7 +29,10 @@ public class MulticastPeer {
         MulticastSocket s =null;
         try {
             InetAddress group = InetAddress.getByName("228.5.6.7");//(args[1]);
-            s = new MulticastSocket(6789);
+            s = new MulticastSocket();
+            System.out.println("My local port is: " + s.getLocalPort());
+            System.out.println("My port is: " + s.getPort());
+
             System.out.println("Time to Live: " + s.getTimeToLive()); // TTL
             s.setTimeToLive(0);  // restringindo ao host
             s.joinGroup(group);

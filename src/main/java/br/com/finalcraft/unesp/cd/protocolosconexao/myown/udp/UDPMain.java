@@ -1,6 +1,6 @@
 package br.com.finalcraft.unesp.cd.protocolosconexao.myown.udp;
 
-import br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.Aula1;
+import br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula1.Aula1;
 
 import java.util.Scanner;
 

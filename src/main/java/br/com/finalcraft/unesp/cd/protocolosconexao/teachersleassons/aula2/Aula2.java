@@ -1,4 +1,4 @@
-package br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons;
+package br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula2;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -6,7 +6,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-public class Aula1 {
+public class Aula2 {
 
     public static void clienteA(){
         try {
