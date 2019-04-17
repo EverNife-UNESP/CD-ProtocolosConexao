@@ -33,19 +33,19 @@ package br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defa
 
 import br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.compute.Compute;
 
+import java.math.BigDecimal;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.math.BigDecimal;
 
-public class ComputePi {
+public class ComputeFat {
     public static void main(String args[]) {
         try {
             String name = "Compute";
             Registry registry = LocateRegistry.getRegistry(1090);
             Compute comp = (Compute) registry.lookup(name);
-            Pi task = new Pi(45);
-            BigDecimal pi = comp.executeTask(task);
-            System.out.println(pi);
+            Fat task = new Fat(10);
+            Integer fat = comp.executeTask(task);
+            System.out.println(fat);
         } catch (Exception e) {
             System.err.println("ComputePi exception:");
             e.printStackTrace();

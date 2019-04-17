@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.engine;
+package br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.serverengine;
 
 import java.net.SocketPermission;
 import java.rmi.RemoteException;
@@ -38,7 +38,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.security.AccessController;
 import java.security.AllPermission;
-import java.security.PrivilegedAction;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.compute.Compute;
 import br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.compute.Task;
@@ -56,35 +58,38 @@ public class ComputeEngine extends UnicastRemoteObject implements Compute {
     public static void main(String[] args) {
 
 
+
+        /*
+        allPermission.implies(socketPermission);
+        allPermission.implies(socketPermission2);
+
+
+
+        java.net.SocketPermission socketPermission = new SocketPermission("localhost:*","connect, resolve");
+        java.net.SocketPermission socketPermission2 = new SocketPermission("localhost:*","accept");
+        java.security.AllPermission allPermission = new AllPermission("localhost:*","*");
+        */
+
+        /*  // Se remover essa budega, o código funciona, pois, pelo visto, você não tem capacidade cognitiva para passar as permissões em tempo de execução.
         if (System.getSecurityManager() == null) {
             System.setSecurityManager(new SecurityManager());
         }
+        */
         try {
+
             String name = "Compute";
             Compute engine = new ComputeEngine();
-            Compute stub =engine;
-            final Registry registry = LocateRegistry.getRegistry(1999);
+            Compute stub = engine;
+            System.setProperty("java.rmi.server.hostname","localhost");
+            final Registry registry = LocateRegistry.createRegistry(1090);
+
+            System.out.println("Going to rebind soon:");
+
+            System.out.println("Going to rebind!");
+            registry.rebind(name, stub);
+            System.out.println("ComputeEngine bound");
 
 
-            java.net.SocketPermission socketPermission = new SocketPermission("localhost:*","connect, resolve");
-            java.net.SocketPermission socketPermission2 = new SocketPermission("localhost:*","accept");
-            java.security.AllPermission allPermission = new AllPermission();
-            allPermission.
-
-            AccessController.doPrivileged(
-                    new PrivilegedAction<Object>() {
-                        @Override
-                        public Object run() {
-                            try {
-                                registry.rebind(name, stub);
-                                System.out.println("ComputeEngine bound");
-                            }catch (Exception e){
-                                e.printStackTrace();
-                            }
-                            return null;
-                        }
-                    }
-            );
         } catch (Exception e) {
             System.err.println("ComputeEngine exception:");
             e.printStackTrace();

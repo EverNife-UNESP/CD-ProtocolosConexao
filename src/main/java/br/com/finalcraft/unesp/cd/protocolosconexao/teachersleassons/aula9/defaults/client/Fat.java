@@ -31,24 +31,25 @@
 
 package br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.client;
 
-import br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.compute.Compute;
+import br.com.finalcraft.unesp.cd.protocolosconexao.teachersleassons.aula9.defaults.compute.Task;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ComputePi {
-    public static void main(String args[]) {
-        try {
-            String name = "Compute";
-            Registry registry = LocateRegistry.getRegistry(1090);
-            Compute comp = (Compute) registry.lookup(name);
-            Pi task = new Pi(45);
-            BigDecimal pi = comp.executeTask(task);
-            System.out.println(pi);
-        } catch (Exception e) {
-            System.err.println("ComputePi exception:");
-            e.printStackTrace();
+public class Fat implements Task<Integer>, Serializable {
+
+    public Integer digit;
+
+    public Fat(Integer digit) {
+        this.digit = digit;
+    }
+
+    @Override
+    public Integer execute() {
+        int i, fact=1;
+        for(i=1;i<=digit;i++){
+            fact=fact*i;
         }
-    }    
+        return fact;
+    }
 }
